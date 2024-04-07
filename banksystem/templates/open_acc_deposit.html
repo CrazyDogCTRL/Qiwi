@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Открытие депозитного счета</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Открытие депозитного счета</h2>
+    <div class="alert alert-info" role="alert">
+        <strong>Условия депозита:</strong><br>
+        <strong>Процентная ставка:</strong> 5%<br>
+        <strong>Можно ли пополнять?</strong> Да<br>
+        <strong>Можно ли снимать?</strong> Нет<br>
+        <strong>Срок депозита:</strong> 1 год
+    </div>
+    <form id="openAccountForm" method="POST" action="/deposit">
+        <div class="form-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="agreeTerms" required>
+                Я прочитал(а) и согласен(на) с условиями открытия счета
+            </label>
+        </div>
+        <!-- Hidden field for method -->
+        <input type="hidden" name="method" value="Openaccount">
+        <input type="hidden" name="kind_of_account" value="Deposit">
+        <!-- End of hidden field -->
+        <!-- Hidden field for percent -->
+        <input type="hidden" name="Percent" value="5">
+        <!-- End of hidden field -->
+        <!-- Hidden field for TimeClose -->
+        <input type="hidden" name="TimeClose" value="31536000">
+        <!-- End of hidden field -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" disabled id="openButton">Открыть счет</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="goBack()">Назад</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('agreeTerms').addEventListener('change', function() {
+        document.getElementById('openButton').disabled = !this.checked;
+    });
+
+    function goBack() {
+        window.location.href = '/deposit';
+    }
+</script>
+</body>
+</html>
+
